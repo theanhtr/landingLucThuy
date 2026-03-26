@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#EE4D2D">
+<title>ກຸນແຈ LUC THUY ລຸ້ນ 85 - 165,000 ກີບ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!--
+==============================================================
+  KẾT NỐI GOOGLE SHEETS
+==============================================================
+1. Tạo Google Sheet → Row 1: Thời gian|Tên|Địa chỉ|SĐT|Số lượng|Phí ship|Tổng
+2. Tiện ích mở rộng → Apps Script → dán:
+
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var data  = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date().toLocaleString('vi-VN'),
+    data.name, data.address, data.phone,
+    data.qty, data.shipping, data.total
+  ]);
+  return ContentService
+    .createTextOutput(JSON.stringify({result:'ok'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+3. Deploy → Web app → Anyone → Copy URL → dán vào SHEET_URL
+==============================================================
+-->
+<script>
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxsQbbuOk_AgPstzshV1-l-eepiiaFhBUgo0SPSsuzTQP3Agw04FkvOnEvbKfLoBHsr/exec";
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:15px;scroll-behavior:smooth}
+
+:root{
+  --red:#EE4D2D;
+  --red-dark:#D43F20;
+  --orange:#F57224;
+  --bg:#F5F5F5;
+  --white:#FFFFFF;
+  --text:#212121;
+  --text2:#555;
+  --muted:#999;
+  --border:#E8E8E8;
+  --green:#26AA99;
+  --tag-bg:#FFF0ED;
+  --tag-red:#EE4D2D;
+}
+
+body{
+  font-family:'Noto Sans Lao',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding-bottom:72px;
+  max-width:480px;
+  margin:0 auto;
+}
+
+/* ── SLIDE VIDEO (first slide) ── */
+.slide-video{
+  flex-shrink:0;width:100%;aspect-ratio:1;
+  scroll-snap-align:start;
+  position:relative;background:#000;
+  overflow:hidden;
+}
+.slide-video video{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.slide-video .sv-badge{
+  position:absolute;top:10px;left:10px;
+  background:rgba(238,77,45,0.9);color:#fff;
+  font-size:0.68rem;font-weight:700;
+  padding:3px 9px;border-radius:4px;
+  display:flex;align-items:center;gap:4px;
+}
+.slide-video .sv-mute{
+  position:absolute;bottom:10px;right:10px;
+  background:rgba(0,0,0,0.5);color:#fff;
+  border:1px solid rgba(255,255,255,0.35);
+  border-radius:100px;padding:5px 11px;
+  font-size:0.7rem;font-family:'Noto Sans Lao',sans-serif;
+  cursor:pointer;backdrop-filter:blur(4px);
+}
+
+/* ── TOP NAV ── */
+.top-nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--red);
+  padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+}
+.nav-back{
+  width:32px;height:32px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.1rem;
+}
+.nav-search{
+  flex:1;
+  background:rgba(255,255,255,0.2);
+  border-radius:6px;
+  padding:8px 12px;
+  display:flex;align-items:center;gap:7px;
+}
+.nav-search span{color:rgba(255,255,255,0.7);font-size:0.8rem;}
+.nav-icons{display:flex;gap:14px;flex-shrink:0;}
+.nav-icons a{color:#fff;font-size:1.1rem;text-decoration:none;}
+
+/* ── IMAGE CAROUSEL ── */
+.img-carousel{
+  position:relative;background:#fff;
+  overflow:hidden;
+}
+.img-slides{
+  display:flex;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none;
+  -webkit-overflow-scrolling:touch;
+}
+.img-slides::-webkit-scrollbar{display:none}
+.img-slide{
+  flex-shrink:0;width:100%;aspect-ratio:1;
+  scroll-snap-align:start;
+}
+.img-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-dots{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  display:flex;gap:5px;
+}
+.img-dots span{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(0,0,0,0.25);transition:background 0.2s,width 0.2s;
+}
+.img-dots span.on{width:18px;border-radius:3px;background:var(--red);}
+.img-count{
+  position:absolute;bottom:10px;right:12px;
+  background:rgba(0,0,0,0.45);color:#fff;
+  font-size:0.72rem;padding:2px 8px;border-radius:100px;
+}
+
+/* ── FLASH SALE BANNER ── */
+.flash-bar{
+  background:linear-gradient(90deg,#FF6633,#FF3300);
+  padding:6px 14px;
+  display:flex;align-items:center;gap:8px;
+}
+.flash-bar .flash-txt{
+  color:#fff;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.05em;text-transform:uppercase;
+}
+.flash-bar .flash-badge{
+  background:rgba(255,255,255,0.25);
+  color:#fff;font-size:0.65rem;font-weight:700;
+  padding:2px 8px;border-radius:3px;
+}
+
+/* ── PRODUCT INFO CARD ── */
+.product-card{background:#fff;padding:14px;}
+
+.price-row{
+  display:flex;align-items:baseline;gap:10px;
+  margin-bottom:8px;
+}
+.price-main{
+  font-size:1.6rem;font-weight:800;color:var(--red);line-height:1;
+}
+.price-unit{font-size:0.82rem;color:var(--text2);}
+.price-ship-tag{
+  background:var(--tag-bg);color:var(--tag-red);
+  font-size:0.68rem;font-weight:700;
+  padding:3px 7px;border-radius:3px;
+  border:1px solid rgba(238,77,45,0.2);
+  flex-shrink:0;
+}
+
+.product-title{
+  font-size:0.95rem;font-weight:600;
+  line-height:1.5;color:var(--text);
+  margin-bottom:10px;
+}
+
+/* Rating row */
+.rating-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  margin-bottom:10px;
+}
+.stars{color:#EE4D2D;font-size:0.8rem;letter-spacing:1px;}
+.rating-count{font-size:0.78rem;color:var(--text2);}
+.rating-divider{width:1px;height:14px;background:var(--border);}
+.sold-count{font-size:0.78rem;color:var(--text2);}
+
+/* Promo tags */
+.promo-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+.promo-tag{
+  display:flex;align-items:center;gap:5px;
+  font-size:0.72rem;color:var(--text2);
+}
+.promo-tag .badge{
+  background:var(--red);color:#fff;
+  font-size:0.6rem;font-weight:700;
+  padding:2px 5px;border-radius:2px;
+  flex-shrink:0;
+}
+
+/* ── SHIPPING INFO ── */
+.ship-card{
+  background:#fff;margin-top:8px;padding:14px;
+}
+.ship-card-title{
+  font-size:0.78rem;font-weight:700;color:var(--muted);
+  letter-spacing:0.06em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.ship-tiers{display:flex;flex-direction:column;gap:0;}
+.ship-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+.ship-row:last-child{border-bottom:none;}
+.ship-icon-wrap{
+  width:36px;height:36px;flex-shrink:0;
+  background:var(--tag-bg);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+.ship-info-text{flex:1;}
+.ship-info-text .s-label{font-size:0.82rem;font-weight:600;color:var(--text);}
+.ship-info-text .s-sub  {font-size:0.72rem;color:var(--muted);margin-top:1px;}
+.ship-fee{font-size:0.82rem;font-weight:700;color:var(--text2);}
+.ship-fee.free{color:var(--green);}
+
+/* ── FEATURES ── */
+.features-card{background:#fff;margin-top:8px;padding:14px;}
+.features-card .sec-hd{
+  font-size:0.85rem;font-weight:800;color:var(--text);
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:6px;
+}
+.features-card .sec-hd::before{
+  content:'';width:3px;height:16px;
+  background:var(--red);border-radius:2px;display:block;
+}
+.feat-list{display:flex;flex-direction:column;gap:0;}
+.feat-row{
+  display:flex;align-items:center;gap:12px;
+  padding:9px 0;border-bottom:1px solid var(--border);
+}
+.feat-row:last-child{border-bottom:none;}
+.feat-row .fi{font-size:1rem;flex-shrink:0;width:24px;text-align:center;}
+.feat-row .ft{font-size:0.83rem;color:var(--text);}
+.feat-row .fv{margin-left:auto;font-size:0.83rem;font-weight:700;color:var(--text2);text-align:right;}
+
+/* ── DESCRIPTION ── */
+.desc-card{background:#fff;margin-top:8px;padding:14px;}
+.desc-hd{display:flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:800;color:var(--text);margin-bottom:12px;}
+
+.desc-preview p{font-size:0.85rem;color:var(--text2);line-height:1.75;margin-bottom:10px;}
+.desc-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.desc-tags span{
+  background:var(--tag-bg);color:var(--tag-red);
+  font-size:0.72rem;font-weight:700;
+  padding:4px 10px;border-radius:100px;
+  border:1px solid rgba(238,77,45,0.15);
+}
+
+.desc-more{display:none;}
+.desc-more.open{display:block;}
+
+.desc-divider{height:1px;background:var(--border);margin:14px 0;}
+.desc-section-title{font-size:0.82rem;font-weight:800;color:var(--text);margin-bottom:10px;}
+
+.desc-spec-list{display:flex;flex-direction:column;gap:0;}
+.ds-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.8rem;}
+.ds-row:last-child{border-bottom:none;}
+.dk{color:var(--muted);flex:0 0 110px;}
+.dv{color:var(--text);font-weight:600;flex:1;}
+
+.desc-includes{display:flex;flex-direction:column;gap:7px;}
+.di-row{font-size:0.82rem;color:var(--text2);line-height:1.5;padding-left:4px;}
+
+.desc-features{display:flex;flex-direction:column;gap:7px;}
+.df-row{font-size:0.82rem;color:var(--text2);line-height:1.5;padding-left:4px;}
+
+.desc-brand-box{
+  background:#FFF8F7;border:1px solid rgba(238,77,45,0.15);
+  border-radius:10px;padding:14px;
+}
+.db-name{font-size:0.85rem;font-weight:800;color:var(--red);margin-bottom:6px;}
+.desc-brand-box p{font-size:0.78rem;color:var(--text2);line-height:1.8;}
+
+.desc-toggle{
+  width:100%;margin-top:14px;
+  padding:11px;border-radius:6px;
+  background:#fff;border:1.5px solid var(--border);
+  color:var(--red);font-size:0.82rem;font-weight:700;
+  font-family:'Noto Sans Lao',sans-serif;
+  cursor:pointer;transition:background 0.15s;
+}
+.desc-toggle:active{background:var(--tag-bg);}
+
+/* ── REVIEWS ── */
+.reviews-card{background:#fff;margin-top:8px;padding:14px;}
+.reviews-hd{
+  display:flex;align-items:center;gap:6px;
+  font-size:0.88rem;font-weight:800;color:var(--text);
+  margin-bottom:14px;
+}
+.sec-bar{width:3px;height:16px;background:var(--red);border-radius:2px;display:block;flex-shrink:0;}
+
+.reviews-score-row{display:flex;align-items:flex-start;gap:16px;margin-bottom:14px;}
+.score-big{
+  font-size:2.8rem;font-weight:900;color:var(--red);
+  line-height:1;flex-shrink:0;
+}
+.score-right{flex:1;}
+.score-stars{color:#EE4D2D;font-size:1rem;letter-spacing:2px;margin-bottom:2px;}
+.score-label{font-size:0.72rem;color:var(--muted);margin-bottom:8px;}
+.score-bars{display:flex;flex-direction:column;gap:4px;}
+.bar-row{display:flex;align-items:center;gap:6px;font-size:0.68rem;color:var(--muted);}
+.bar-row span:first-child{width:20px;text-align:right;flex-shrink:0;}
+.bar-row span:last-child{width:18px;flex-shrink:0;}
+.bar-track{flex:1;height:5px;background:#f0f0f0;border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--red);border-radius:3px;}
+
+.reviews-divider{height:1px;background:var(--border);margin:14px 0;}
+
+.review-item{}
+.rv-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.rv-avatar{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:var(--red);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.85rem;font-weight:800;
+}
+.rv-meta{flex:1;}
+.rv-name{font-size:0.82rem;font-weight:700;color:var(--text);}
+.rv-stars{font-size:0.72rem;color:#EE4D2D;letter-spacing:1px;margin-top:1px;}
+.rv-date{font-size:0.7rem;color:var(--muted);flex-shrink:0;}
+.rv-text{font-size:0.82rem;color:var(--text2);line-height:1.65;margin-bottom:10px;}
+
+.rv-photos{display:flex;gap:6px;flex-wrap:wrap;}
+.rv-photo{
+  width:74px;height:74px;border-radius:6px;overflow:hidden;
+  border:1px solid var(--border);flex-shrink:0;
+}
+.rv-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.rv-photo.placeholder{
+  display:flex;align-items:center;justify-content:center;
+  background:#FAFAFA;border:1.5px dashed #ddd;
+}
+.rv-photo.placeholder span{font-size:0.68rem;color:#bbb;}
+
+/* ── SPECS ── */
+.specs-card{background:#fff;margin-top:8px;padding:14px;}
+.specs-img{width:100%;border-radius:8px;margin-bottom:14px;display:block;}
+.spec-table{display:flex;flex-direction:column;gap:0;}
+.spec-row{
+  display:flex;
+  padding:9px 0;border-bottom:1px solid var(--border);
+  font-size:0.82rem;
+}
+.spec-row:last-child{border-bottom:none;}
+.spec-row .sk{color:var(--muted);flex:0 0 120px;}
+.spec-row .sv{font-weight:600;color:var(--text);flex:1;}
+
+/* ── PHOTO SECTION ── */
+.photos-card{background:#fff;margin-top:8px;padding:14px;}
+.photos-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px;
+}
+.photo-item{border-radius:6px;overflow:hidden;aspect-ratio:1;}
+.photo-item.wide{grid-column:span 2;aspect-ratio:16/9;}
+.photo-item img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* ── ORDER FORM ── */
+.order-card{
+  background:#fff;margin-top:8px;padding:14px;
+  border-top:3px solid var(--red);
+}
+.order-hd{
+  display:flex;align-items:center;gap:6px;
+  font-size:0.95rem;font-weight:800;color:var(--text);
+  margin-bottom:16px;
+}
+.order-hd::before{
+  content:'';width:3px;height:18px;
+  background:var(--red);border-radius:2px;
+}
+
+.form-group{margin-bottom:12px;}
+.form-group label{
+  display:block;font-size:0.75rem;font-weight:700;
+  color:var(--text2);margin-bottom:6px;
+}
+.form-group input{
+  width:100%;
+  border:1.5px solid var(--border);
+  border-radius:6px;padding:12px 13px;
+  font-size:0.9rem;color:var(--text);
+  font-family:'Noto Sans Lao',sans-serif;
+  outline:none;background:#fff;
+  transition:border-color 0.15s;
+  -webkit-appearance:none;
+}
+.form-group input:focus{border-color:var(--red);}
+.form-group input::placeholder{color:#ccc;}
+
+/* Qty stepper */
+.qty-stepper{
+  display:flex;align-items:center;
+  border:1.5px solid var(--border);
+  border-radius:6px;overflow:hidden;width:fit-content;
+}
+.q-btn{
+  width:44px;height:44px;
+  background:#f8f8f8;border:none;
+  font-size:1.3rem;line-height:1;
+  cursor:pointer;color:var(--text2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background 0.1s;
+}
+.q-btn:active{background:#ffe8e4;color:var(--red);}
+.q-input{
+  width:56px;text-align:center;
+  border:none;border-left:1.5px solid var(--border);border-right:1.5px solid var(--border);
+  font-size:1rem;font-weight:700;color:var(--text);
+  font-family:'Noto Sans Lao',sans-serif;
+  padding:0;height:44px;outline:none;
+  -moz-appearance:textfield;
+}
+.q-input::-webkit-outer-spin-button,
+.q-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+
+/* Order summary */
+.order-summary{
+  background:#FFF8F7;
+  border:1px solid rgba(238,77,45,0.15);
+  border-radius:8px;padding:12px 14px;
+  margin:14px 0;
+}
+.sum-row{
+  display:flex;justify-content:space-between;
+  font-size:0.82rem;color:var(--text2);
+  padding:4px 0;
+}
+.sum-divider{height:1px;background:rgba(238,77,45,0.15);margin:8px 0;}
+.sum-total{
+  display:flex;justify-content:space-between;
+  align-items:baseline;padding:4px 0;
+}
+.sum-total .tl{font-size:0.85rem;font-weight:700;color:var(--text);}
+.sum-total .tv{font-size:1.2rem;font-weight:800;color:var(--red);}
+
+/* Error */
+.form-err{
+  display:none;
+  background:#FFF2F0;border:1px solid #FFCCC7;
+  border-radius:6px;padding:10px 13px;
+  font-size:0.8rem;color:var(--red);
+  margin-bottom:12px;
+}
+
+/* Submit */
+.submit-btn{
+  width:100%;padding:15px;
+  background:var(--red);color:#fff;
+  font-weight:800;font-size:1rem;
+  font-family:'Noto Sans Lao',sans-serif;
+  border:none;border-radius:8px;cursor:pointer;
+  transition:opacity 0.15s;
+  -webkit-appearance:none;
+}
+.submit-btn:active{opacity:0.88;}
+.submit-btn.loading{opacity:0.6;pointer-events:none;}
+.form-note{
+  text-align:center;font-size:0.72rem;
+  color:var(--muted);margin-top:8px;line-height:1.6;
+}
+
+/* ── SUCCESS ── */
+.success-box{
+  display:none;text-align:center;padding:24px 16px;
+}
+.success-box.show{display:block;}
+.success-icon{font-size:3rem;margin-bottom:10px;}
+.success-box h3{font-size:1.2rem;font-weight:800;color:var(--green);margin-bottom:6px;}
+.success-box p{font-size:0.83rem;color:var(--text2);line-height:1.7;}
+.order-ref{
+  margin-top:14px;background:#F5F5F5;
+  border-radius:8px;padding:12px 14px;
+  font-size:0.8rem;color:var(--text2);
+  line-height:2;text-align:left;
+}
+
+/* ── STICKY BOTTOM BAR ── */
+.bottom-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  max-width:480px;margin:0 auto;
+  background:#fff;
+  border-top:1px solid var(--border);
+  padding:10px 14px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 -2px 12px rgba(0,0,0,0.08);
+}
+.bottom-price{flex:1;}
+.bottom-price .bp-label{font-size:0.68rem;color:var(--muted);}
+.bottom-price .bp-amount{font-size:1.1rem;font-weight:800;color:var(--red);}
+.bottom-btn{
+  flex:1.5;
+  padding:13px 16px;border-radius:6px;border:none;
+  cursor:pointer;font-family:'Noto Sans Lao',sans-serif;
+  font-size:0.9rem;font-weight:700;
+  text-decoration:none;display:block;text-align:center;
+  background:var(--red);color:#fff;
+  transition:opacity 0.15s;
+  -webkit-appearance:none;
+}
+.bottom-btn:active{opacity:0.85;}
+
+/* ── FOOTER ── */
+.footer{
+  background:#fff;margin-top:8px;
+  padding:20px 14px;text-align:center;
+  font-size:0.75rem;color:var(--muted);line-height:1.9;
+  border-top:1px solid var(--border);
+}
+.footer strong{color:var(--red);}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(12px);transition:opacity 0.45s,transform 0.45s;}
+.rv.on{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="top-nav">
+  <div class="nav-back">←</div>
+  <div class="nav-search">
+    <span>🔍</span>
+    <span>ກຸນແຈ LUC THUY ລຸ້ນ 85</span>
+  </div>
+  <div class="nav-icons">
+    <a href="#order">🛒</a>
+  </div>
+</div>
+
+<!-- IMAGE CAROUSEL -->
+<div class="img-carousel" id="carousel">
+  <div class="img-slides" id="slides" onscroll="updateDots()">
+
+    <!-- ① VIDEO SLIDE — đổi "video.mp4" thành tên file của bạn -->
+    <div class="slide-video">
+      <video id="hero-video" src="video.mp4"
+        autoplay muted loop playsinline preload="auto"
+        onerror="this.closest('.slide-video').style.display='none';adjustTotal()">
+      </video>
+      <div class="sv-badge">▶ ຄລິບສິນຄ້າ</div>
+      <button class="sv-mute" id="mute-btn" onclick="toggleMute()">🔇 ເປີດສຽງ</button>
+    </div>
+
+    <!-- ② ảnh 1 -->
+    <div class="img-slide">
+      <img src="85.png" alt="ກຸນແຈ 85"
+           onerror="this.src='https://placehold.co/480x480/fff/EE4D2D?text=Lock+85'">
+    </div>
+    <div class="img-slide">
+      <img src="86.png" alt="ຊຸດອຸປະກອນ"
+           onerror="this.src='https://placehold.co/480x480/fff/EE4D2D?text=Set'">
+    </div>
+    <div class="img-slide">
+      <img src="87.png" alt="ຂະໜາດ"
+           onerror="this.src='https://placehold.co/480x480/fff/EE4D2D?text=Size'">
+    </div>
+    <div class="img-slide">
+      <img src="88.png" alt="ໃນເຮືອນ"
+           onerror="this.src='https://placehold.co/480x480/fff/EE4D2D?text=Home'">
+    </div>
+    <div class="img-slide">
+      <img src="mmm.png" alt="ຕິດຕັ້ງ"
+           onerror="this.src='https://placehold.co/480x480/fff/EE4D2D?text=Install'">
+    </div>
+    <div class="img-slide">
+      <img src="install1.jpg" alt="ຕິດຕັ້ງ 2"
+           onerror="this.src='https://placehold.co/480x480/fff/EE4D2D?text=Install+1'">
+    </div>
+    <div class="img-slide">
+      <img src="install2.jpg" alt="ຕິດຕັ້ງ 3"
+           onerror="this.src='https://placehold.co/480x480/fff/EE4D2D?text=Install+2'">
+    </div>
+  </div>
+  <div class="img-dots" id="dots"></div>
+  <div class="img-count" id="img-count">1 / 8</div>
+</div>
+
+<!-- FLASH BAR -->
+<div class="flash-bar">
+  <span class="flash-txt">⚡ ໂປໂມຊັ່ນ</span>
+  <span class="flash-badge">ຟຣີຄ່າສ່ງ ສຳລັບ 20+ ຊຸດ</span>
+  <span class="flash-badge" style="margin-left:auto;">ຮັບປະກັນ 2 ປີ</span>
+</div>
+
+<!-- PRODUCT INFO -->
+<div class="product-card rv">
+  <div class="price-row">
+    <div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:2px;">ລາຄາ / ໂຕ</div>
+      <div class="price-main">165,000 <span class="price-unit">ກີບ</span></div>
+    </div>
+    <div class="price-ship-tag">ລວມຊຸດຕິດຕັ້ງ</div>
+  </div>
+
+  <div class="product-title">
+    ກຸນແຈປະຕູ LUC THUY ລຸ້ນ 85 — ສະແຕນເລດ 304 ແທ້ ຄົບຊຸດ ລໍ້ຄ 3 ຈຸດ ກຸນແຈ 3 ດອກ ຮັບປະກັນ 2 ປີ
+  </div>
+
+  <div class="rating-row">
+    <div class="stars">★★★★★</div>
+    <div class="rating-count">5.0 (87 ຄຳຕິຊົມ)</div>
+    <div class="rating-divider"></div>
+    <div class="sold-count">ຂາຍໄປ 500+ ຊຸດ</div>
+  </div>
+
+  <div class="promo-row">
+    <div class="promo-tag"><span class="badge">ຮັບປະກັນ</span> 2 ປີ ເຕັມ ທຸກຊິ້ນ</div>
+    <div class="promo-tag"><span class="badge">ຟຣີ</span> ຊຸດຕິດຕັ້ງ</div>
+    <div class="promo-tag"><span class="badge">ແທ້</span> ສະແຕນເລດ 304</div>
+  </div>
+</div>
+
+<!-- SHIPPING -->
+<div class="ship-card rv">
+  <div class="ship-card-title">📦 ຄ່າຂົນສ່ງ</div>
+  <div class="ship-tiers">
+    <div class="ship-row">
+      <div class="ship-icon-wrap">📦</div>
+      <div class="ship-info-text">
+        <div class="s-label">ໜ້ອຍກວ່າ 10 ຊຸດ</div>
+        <div class="s-sub">ສ່ງທົ່ວ ສ.ປ.ປ.ລາວ</div>
+      </div>
+      <div class="ship-fee">30,000 ກີບ</div>
+    </div>
+    <div class="ship-row">
+      <div class="ship-icon-wrap">🚚</div>
+      <div class="ship-info-text">
+        <div class="s-label">10 – 20 ຊຸດ</div>
+        <div class="s-sub">ລາຄາພິເສດ ຈໍານວນຫຼາຍ</div>
+      </div>
+      <div class="ship-fee">20,000 ກີບ</div>
+    </div>
+    <div class="ship-row">
+      <div class="ship-icon-wrap">🎁</div>
+      <div class="ship-info-text">
+        <div class="s-label">ຫຼາຍກວ່າ 20 ຊຸດ</div>
+        <div class="s-sub">ໂຄງການ / ຮ້ານຄ້າ</div>
+      </div>
+      <div class="ship-fee free">ຟຣີ!</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features-card rv">
+  <div class="sec-hd">ຄຸນລັກສະນະ</div>
+  <div class="feat-list">
+    <div class="feat-row">
+      <div class="fi">🔩</div>
+      <div class="ft">ວັດສະດຸ</div>
+      <div class="fv">ສະແຕນເລດ 304</div>
+    </div>
+    <div class="feat-row">
+      <div class="fi">🔒</div>
+      <div class="ft">ລະບົບລໍ້ຄ</div>
+      <div class="fv">3 ຈຸດ ຮັດກຸມ</div>
+    </div>
+    <div class="feat-row">
+      <div class="fi">✨</div>
+      <div class="ft">ດີຊາຍ</div>
+      <div class="fv">European Style</div>
+    </div>
+    <div class="feat-row">
+      <div class="fi">🗝️</div>
+      <div class="ft">ກຸນແຈ</div>
+      <div class="fv">3 ດອກ / ຊຸດ</div>
+    </div>
+    <div class="feat-row">
+      <div class="fi">🛠️</div>
+      <div class="ft">ອຸປະກອນ</div>
+      <div class="fv">ຄົບຊຸດ ພ້ອມໃຊ້</div>
+    </div>
+    <div class="feat-row">
+      <div class="fi">🏆</div>
+      <div class="ft">ຮັບປະກັນ</div>
+      <div class="fv">2 ປີ ເຕັມ</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPECS -->
+<div class="specs-card rv">
+  <div class="sec-hd" style="display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:800;margin-bottom:12px;">
+    <span style="width:3px;height:16px;background:var(--red);border-radius:2px;display:block;flex-shrink:0;"></span>
+    ຂໍ້ມູນດ້ານວິຊາການ
+  </div>
+  <img src="87.png" class="specs-img" alt="ຂະໜາດ"
+       onerror="this.src='https://placehold.co/440x440/f5f5f5/EE4D2D?text=Spec'">
+  <div class="spec-table">
+    <div class="spec-row"><span class="sk">ວັດສະດຸ</span><span class="sv">ສະແຕນເລດ 304</span></div>
+    <div class="spec-row"><span class="sk">ຂະໜາດແຜ່ນ</span><span class="sv">200 × 48 mm</span></div>
+    <div class="spec-row"><span class="sk">Handle</span><span class="sv">120 mm</span></div>
+    <div class="spec-row"><span class="sk">Mortise Lock</span><span class="sv">125 × 50 mm</span></div>
+    <div class="spec-row"><span class="sk">ສີ</span><span class="sv">Chrome / Silver</span></div>
+    <div class="spec-row"><span class="sk">ກຸນແຈ</span><span class="sv">3 ດອກ / ຊຸດ</span></div>
+  </div>
+</div>
+
+<!-- PRODUCT DESCRIPTION -->
+<div class="desc-card rv">
+  <div class="desc-hd">
+    <span class="sec-bar"></span>
+    ລາຍລະອຽດສິນຄ້າ
+  </div>
+
+  <!-- Short preview (always visible) -->
+  <div class="desc-preview">
+    <p>ກຸນແຈທາດກ້ານ inox <strong>ລຸກທຸຍ</strong> — ເໝາະສຳລັບປະຕູຫ້ອງນອນ, ປະຕູຫ້ອງນ້ຳ ແລະ ປະຕູຫຼັກ. ດີໄຊ ເສັ້ນໂຄ້ງໂສພາ ຜິວສຳເລົາ ໜ້າຕາງາມ. ຜະລິດຈາກ <strong>inox ກັນໝອງ 304</strong> ຄຸນນະພາບສູງ ທົນທານທຸກສະພາບອາກາດ.</p>
+
+    <div class="desc-tags">
+      <span>✅ ບໍ່ຂຶ້ນໝອງ</span>
+      <span>✅ ໃຊ້ງານງ່າຍ</span>
+      <span>✅ ສ່ງອອກ 40+ ປະເທດ</span>
+    </div>
+  </div>
+
+  <!-- Expanded content (hidden by default) -->
+  <div class="desc-more" id="desc-more">
+
+    <div class="desc-divider"></div>
+
+    <div class="desc-section-title">📐 ຂໍ້ມູນດ້ານວິຊາການ</div>
+    <div class="desc-spec-list">
+      <div class="ds-row"><span class="dk">ວັດສະດຸ</span><span class="dv">Inox ກັນໝອງ 304 ຄຸນນະພາບສູງ</span></div>
+      <div class="ds-row"><span class="dk">ໜ້າ opsalp</span><span class="dv">200mm (ສູງ) × 48mm (ກວ້າງ)</span></div>
+      <div class="ds-row"><span class="dk">ຄວາມຍາວກ້ານ</span><span class="dv">120mm</span></div>
+      <div class="ds-row"><span class="dk">ຂະໜາດລໍ້ຄ</span><span class="dv">ຍາວ 125mm / ທາງໃຈ 50mm</span></div>
+      <div class="ds-row"><span class="dk">ລຳໄສ້ລໍ້ຄ</span><span class="dv">ລຳໄສ້ຟັນໝາ · 7 ລູກໝາກທອງ · ໝຸນໜັກ</span></div>
+    </div>
+
+    <div class="desc-divider"></div>
+
+    <div class="desc-section-title">📦 ສິ່ງທີ່ໄດ້ຮັບໃນກ່ອງ</div>
+    <div class="desc-includes">
+      <div class="di-row">✔ ກ້ານໂລຫະ inox × 2 ອັນ</div>
+      <div class="di-row">✔ ຕົວລໍ້ຄ (Mortise body) × 1 ອັນ</div>
+      <div class="di-row">✔ ລຳໄສ້ລໍ້ຄ (Cylinder) × 1 ອັນ</div>
+      <div class="di-row">✔ ກຸນແຈຟັນຂ້ອ ປ້ອງກັນການລ໋ອກ × 3 ດອກ</div>
+      <div class="di-row">✔ ໜ້າ inox × 2 ອັນ</div>
+      <div class="di-row">✔ ສະກຣູ ແລະ ອຸປະກອນຕິດຕັ້ງຄົບຊຸດ</div>
+    </div>
+
+    <div class="desc-divider"></div>
+
+    <div class="desc-section-title">⭐ ຈຸດເດັ່ນ</div>
+    <div class="desc-features">
+      <div class="df-row">✅ ເຄື່ອນໄຫວລຽບງ່າຍ — ໃຊ້ທົນນານ</div>
+      <div class="df-row">✅ ບໍ່ຂຶ້ນໝອງ — ເໝາະອາກາດຊຸ່ມຊື່ນ</div>
+      <div class="df-row">✅ ດີໄຊໂຄ້ງໂສພາ ປອດໄພ ບໍ່ຄົມ</div>
+      <div class="df-row">✅ ໃຊ້ໄດ້ກັບ: ປະຕູໄມ້, ປະຕູ composite, ຫ້ອງນອນ, ຫ້ອງນ້ຳ, ຫ້ອງການ</div>
+    </div>
+
+    <div class="desc-divider"></div>
+
+    <div class="desc-brand-box">
+      <div class="db-name">🏛️ ບໍລິສັດ ລຸກທຸຍ</div>
+      <p>ຜູ້ຈັດຈຳໜ່າຍອຸປະກອນຄຸນນະພາບ — ກຸນແຈ ແລະ ອຸປະກອນຕົກແຕ່ງພາຍໃນ.<br>
+      ສ່ງອອກ <strong>40+ ປະເທດ</strong> ລວມທັງ ອາເມລິກາ ແລະ EU — ໄດ້ຮັບການຮັບຮອງຄຸນນະພາບສາກົນ!<br>
+      ມຸ່ງໝັ້ນມອບທາງເລືອກທີ່ປອດໄພ ລາຄາເໝາະສົມ ສຳລັບທຸກລູກຄ້າ.</p>
+    </div>
+  </div>
+
+  <!-- Show more / less button -->
+  <button class="desc-toggle" id="desc-toggle" onclick="toggleDesc()">
+    ເບິ່ງລາຍລະອຽດເພີ່ມ ▾
+  </button>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-card rv">
+  <div class="reviews-hd">
+    <span class="sec-bar"></span>
+    ຄຳຕິຊົມຈາກລູກຄ້າ
+  </div>
+
+  <!-- Overall score -->
+  <div class="reviews-score-row">
+    <div class="score-big">5.0</div>
+    <div class="score-right">
+      <div class="score-stars">★★★★★</div>
+      <div class="score-label">ຈາກ 87 ຄຳຕິຊົມ</div>
+      <div class="score-bars">
+        <div class="bar-row"><span>5★</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span>76</span></div>
+        <div class="bar-row"><span>4★</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span>9</span></div>
+        <div class="bar-row"><span>3★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span>2</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-divider"></div>
+
+  <!-- Review 1 -->
+  <div class="review-item">
+    <div class="rv-top">
+      <div class="rv-avatar">ສ</div>
+      <div class="rv-meta">
+        <div class="rv-name">ສົມໄຊ ພ.</div>
+        <div class="rv-stars">★★★★★</div>
+      </div>
+      <div class="rv-date">2 ມື້ກ່ອນ</div>
+    </div>
+    <p class="rv-text">ກຸນແຈສວຍງາມຫຼາຍ ຜິວສຳເລົາ ບໍ່ໝອງ ຕິດຕັ້ງງ່າຍ ຄ່າຂົນສ່ງກໍບໍ່ແພງ ຈະສັ່ງຊື້ອີກ 🔥</p>
+    <!-- ຮູບລູກຄ້າ 1 — ວາງໄຟລ໌ຮູບຊື່ review1a.jpg, review1b.jpg -->
+    <div class="rv-photos">
+      <div class="rv-photo"><img src="review1a.jpg" alt="" onerror="this.closest('.rv-photo').style.display='none'"></div>
+      <div class="rv-photo"><img src="review1b.jpg" alt="" onerror="this.closest('.rv-photo').style.display='none'"></div>
+      <div class="rv-photo placeholder"><span>+ ຮູບ</span></div>
+    </div>
+  </div>
+
+  <div class="reviews-divider"></div>
+
+  <!-- Review 2 -->
+  <div class="review-item">
+    <div class="rv-top">
+      <div class="rv-avatar" style="background:#F57224;">ນ</div>
+      <div class="rv-meta">
+        <div class="rv-name">ນາງ ວັນນາ</div>
+        <div class="rv-stars">★★★★★</div>
+      </div>
+      <div class="rv-date">5 ມື້ກ່ອນ</div>
+    </div>
+    <p class="rv-text">ໄດ້ຮັບສິນຄ້າໄວ ຄຸນນະພາບດີກວ່າທີ່ຄາດ ຜິວເງົາສວຍ ໜັກແໜ້ນ ຕິດຕັ້ງງ່າຍ ແນະນຳໃຫ້ທຸກຄົນ 👍</p>
+    <!-- ຮູບລູກຄ້າ 2 — ວາງໄຟລ໌ review2a.jpg -->
+    <div class="rv-photos">
+      <div class="rv-photo"><img src="review2a.jpg" alt="" onerror="this.closest('.rv-photo').style.display='none'"></div>
+      <div class="rv-photo placeholder"><span>+ ຮູບ</span></div>
+      <div class="rv-photo placeholder"><span>+ ຮູບ</span></div>
+    </div>
+  </div>
+
+  <div class="reviews-divider"></div>
+
+  <!-- Review 3 -->
+  <div class="review-item">
+    <div class="rv-top">
+      <div class="rv-avatar" style="background:#26AA99;">ບ</div>
+      <div class="rv-meta">
+        <div class="rv-name">ບຸນທະວີ ສ.</div>
+        <div class="rv-stars">★★★★★</div>
+      </div>
+      <div class="rv-date">1 ອາທິດກ່ອນ</div>
+    </div>
+    <p class="rv-text">ສັ່ງ 15 ໂຕ ສຳລັບໂຄງການບ້ານພັກ ຄ່າຂົນສ່ງ 20,000 ດຽວ ຄຸ້ມຫຼາຍ ກຸນແຈສວຍງາມ ໜັກແໜ້ນ ທົນທານ ຈະສັ່ງຊື້ເພີ່ມ ✅</p>
+    <!-- ຮູບລູກຄ້າ 3 — ວາງໄຟລ໌ review3a.jpg, review3b.jpg, review3c.jpg -->
+    <div class="rv-photos">
+      <div class="rv-photo"><img src="review3a.jpg" alt="" onerror="this.closest('.rv-photo').style.display='none'"></div>
+      <div class="rv-photo"><img src="review3b.jpg" alt="" onerror="this.closest('.rv-photo').style.display='none'"></div>
+      <div class="rv-photo"><img src="review3c.jpg" alt="" onerror="this.closest('.rv-photo').style.display='none'"></div>
+    </div>
+  </div>
+
+  <div class="reviews-divider"></div>
+
+  <!-- Review 4 -->
+  <div class="review-item">
+    <div class="rv-top">
+      <div class="rv-avatar" style="background:#9C27B0;">ລ</div>
+      <div class="rv-meta">
+        <div class="rv-name">ລື້ ຈ.</div>
+        <div class="rv-stars" style="color:#EE4D2D;">★★★★<span style="color:#ddd;">★</span></div>
+      </div>
+      <div class="rv-date">2 ອາທິດກ່ອນ</div>
+    </div>
+    <p class="rv-text">ສິນຄ້າດີ ຕິດຕັ້ງງ່າຍ ຄົບຊຸດ ຜິວເງົາສວຍ ພຽງແຕ່ຄູ່ມືຕິດຕັ້ງຍັງມີລາຍລະອຽດໜ້ອຍ ໂດຍລວມໃຊ້ງານໄດ້ດີ 4/5 ⭐</p>
+    <div class="rv-photos">
+      <div class="rv-photo"><img src="review4a.jpg" alt="" onerror="this.closest('.rv-photo').style.display='none'"></div>
+      <div class="rv-photo placeholder"><span>+ ຮູບ</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ORDER FORM -->
+<div class="order-card rv" id="order">
+  <div class="order-hd">ສັ່ງຊື້ດ່ວນ</div>
+
+  <div id="order-form">
+    <div class="form-group">
+      <label>ຊື່ລູກຄ້າ *</label>
+      <input type="text" id="f-name" placeholder="ກະລຸນາໃສ່ຊື່..." autocomplete="name">
+    </div>
+    <div class="form-group">
+      <label>ທີ່ຢູ່ຈັດສ່ງ *</label>
+      <input type="text" id="f-address" placeholder="ເມືອງ, ແຂວງ..." autocomplete="street-address">
+    </div>
+    <div class="form-group">
+      <label>ເບີໂທຕິດຕໍ່ *</label>
+      <input type="tel" id="f-phone" placeholder="+856 20 xxxx xxxx" autocomplete="tel" inputmode="tel">
+    </div>
+    <div class="form-group">
+      <label>ຈໍານວນ (ຊຸດ)</label>
+      <div class="qty-stepper">
+        <button class="q-btn" type="button" onclick="changeQty(-1)">−</button>
+        <input class="q-input" type="number" id="f-qty" value="1" min="1" max="999"
+               oninput="updateSummary()" inputmode="numeric">
+        <button class="q-btn" type="button" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <div class="order-summary">
+      <div class="sum-row"><span>ຈໍານວນ</span><span id="s-qty">1 ຊຸດ</span></div>
+      <div class="sum-row"><span>ລາຄາສິນຄ້າ</span><span id="s-price">165,000 ກີບ</span></div>
+      <div class="sum-row"><span>ຄ່າຂົນສ່ງ</span><span id="s-ship">30,000 ກີບ</span></div>
+      <div class="sum-divider"></div>
+      <div class="sum-total">
+        <span class="tl">ລວມທັງໝົດ</span>
+        <span class="tv" id="s-total">195,000 ກີບ</span>
+      </div>
+    </div>
+
+    <div class="form-err" id="form-err"></div>
+
+    <button class="submit-btn" id="submit-btn" type="button" onclick="submitOrder()">
+      ສັ່ງຊື້ດຽວນີ້
+    </button>
+    <p class="form-note">ຂໍ້ມູນຈະຖືກບັນທຶກ Google Sheets · ທີມງານຈະຕິດຕໍ່ກັບຄືນໂດຍໄວ</p>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-box" id="success-box">
+    <div class="success-icon">🎉</div>
+    <h3>ສັ່ງຊື້ສຳເລັດ!</h3>
+    <p>ທີມງານຈະຕິດຕໍ່ທ່ານ<br>ໂດຍໄວທີ່ສຸດ</p>
+    <div class="order-ref" id="order-ref"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>LUC THUY Hardware</strong><br>
+  ສິນຄ້າຄຸນນະພາບ · ສ.ປ.ປ. ລາວ · © 2025
+</div>
+
+<!-- STICKY BOTTOM BAR -->
+<div class="bottom-bar" id="bottom-bar">
+  <div class="bottom-price">
+    <div class="bp-label">ລາຄາ / ໂຕ</div>
+    <div class="bp-amount">165,000 ກີບ</div>
+  </div>
+  <a href="#order" class="bottom-btn">🛒 ສັ່ງຊື້ດຽວນີ້</a>
+</div>
+
+<script>
+// ── Description toggle ──
+function toggleDesc(){
+  const more = document.getElementById('desc-more');
+  const btn  = document.getElementById('desc-toggle');
+  const open = more.classList.toggle('open');
+  btn.textContent = open ? 'ຫຍໍ້ຄືນ ▴' : 'ເບິ່ງລາຍລະອຽດເພີ່ມ ▾';
+}
+
+// ── Video: autoplay khi slide 0, pause khi vuốt sang ──
+let totalSlides = 8;
+
+function adjustTotal(){
+  // Called if video fails to load — remove video slide from count
+  totalSlides = 7;
+  rebuildDots();
+}
+
+function toggleMute(){
+  const v = document.getElementById('hero-video');
+  const btn = document.getElementById('mute-btn');
+  if(!v) return;
+  v.muted = !v.muted;
+  btn.textContent = v.muted ? '🔇 ເປີດສຽງ' : '🔊 ປິດສຽງ';
+}
+
+// Force autoplay
+document.addEventListener('DOMContentLoaded', ()=>{
+  const v = document.getElementById('hero-video');
+  if(v){ v.muted = true; v.play().catch(()=>{}); }
+});
+
+// ── Carousel dots ──
+const slides = document.getElementById('slides');
+const dotsEl = document.getElementById('dots');
+const countEl = document.getElementById('img-count');
+
+function rebuildDots(){
+  dotsEl.innerHTML='';
+  for(let i=0;i<totalSlides;i++){
+    const d=document.createElement('span');
+    if(i===0)d.classList.add('on');
+    dotsEl.appendChild(d);
+  }
+}
+rebuildDots();
+
+function updateDots(){
+  const idx = Math.round(slides.scrollLeft / slides.clientWidth);
+  document.querySelectorAll('.img-dots span').forEach((d,i)=>{
+    d.classList.toggle('on', i===idx);
+  });
+  countEl.textContent = `${idx+1} / ${totalSlides}`;
+
+  // Play video only when on slide 0, pause otherwise
+  const v = document.getElementById('hero-video');
+  if(v){ idx===0 ? v.play().catch(()=>{}) : v.pause(); }
+}
+
+// ── Qty ──
+const PRICE = 165000;
+
+function changeQty(d){
+  const el=document.getElementById('f-qty');
+  let v=Math.max(1,(parseInt(el.value)||1)+d);
+  el.value=v; updateSummary();
+}
+
+function updateSummary(){
+  const qty=parseInt(document.getElementById('f-qty').value)||1;
+  let fee=30000,feeText='30,000 ກີບ';
+  if(qty>20)      {fee=0;    feeText='ຟຣີ 🎉';}
+  else if(qty>=10){fee=20000;feeText='20,000 ກີບ';}
+
+  const sub=qty*PRICE, tot=sub+fee;
+  const fmt=n=>n.toLocaleString();
+
+  document.getElementById('s-qty').textContent   = qty+' ຊຸດ';
+  document.getElementById('s-price').textContent = fmt(sub)+' ກີບ';
+  document.getElementById('s-ship').textContent  = feeText;
+  document.getElementById('s-total').textContent = fmt(tot)+' ກີບ';
+}
+
+// ── Submit ──
+async function submitOrder(){
+  const name    =document.getElementById('f-name').value.trim();
+  const address =document.getElementById('f-address').value.trim();
+  const phone   =document.getElementById('f-phone').value.trim();
+  const qty     =parseInt(document.getElementById('f-qty').value)||1;
+  const errEl   =document.getElementById('form-err');
+  const btn     =document.getElementById('submit-btn');
+
+  errEl.style.display='none';
+  if(!name||!address||!phone){
+    errEl.textContent='⚠️ ກະລຸນາຕື່ມຂໍ້ມູນໃຫ້ຄົບທຸກຊ່ອງ!';
+    errEl.style.display='block';
+    return;
+  }
+
+  let fee=30000,shipping='30,000 ກີບ';
+  if(qty>20)      {fee=0;    shipping='ຟຣີ';}
+  else if(qty>=10){fee=20000;shipping='20,000 ກີບ';}
+  const total=((qty*PRICE+fee)).toLocaleString()+' ກີບ';
+
+  if(!SHEET_URL||SHEET_URL==='PASTE_YOUR_APPS_SCRIPT_URL_HERE'){
+    showSuccess(name,qty,shipping,total); return;
+  }
+
+  btn.classList.add('loading');
+  btn.textContent='ກຳລັງສ່ງ...';
+
+  try{
+    await fetch(SHEET_URL,{
+      method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,address,phone,qty,shipping,total})
+    });
+    showSuccess(name,qty,shipping,total);
+  }catch{
+    btn.classList.remove('loading');
+    btn.textContent='ສັ່ງຊື້ດຽວນີ້';
+    errEl.textContent='❌ ເກີດຂໍ້ຜິດພາດ — ກະລຸນາລອງໃໝ່';
+    errEl.style.display='block';
+  }
+}
+
+function showSuccess(name,qty,shipping,total){
+  document.getElementById('order-form').style.display='none';
+  document.getElementById('bottom-bar').style.display='none';
+  const box=document.getElementById('success-box');
+  box.classList.add('show');
+  const ref='LT-'+Date.now().toString(36).toUpperCase().slice(-6);
+  document.getElementById('order-ref').innerHTML=
+    `👤 <strong>${name}</strong><br>`+
+    `🔒 <strong>${qty} ຊຸດ</strong> × 165,000 ກີບ<br>`+
+    `📦 ຄ່າສ່ງ: <strong>${shipping}</strong><br>`+
+    `💰 ລວມ: <strong style="color:var(--red)">${total}</strong><br>`+
+    `<small style="opacity:.5">Ref: ${ref}</small>`;
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// ── Hide bottom bar when order section visible ──
+const orderEl=document.getElementById('order');
+const barEl=document.getElementById('bottom-bar');
+const barObs=new IntersectionObserver(([e])=>{
+  barEl.style.transform=e.isIntersecting?'translateY(100%)':'translateY(0)';
+  barEl.style.transition='transform 0.25s ease';
+},{threshold:0.2});
+barObs.observe(orderEl);
+
+// ── Scroll reveal ──
+const rv=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('on'),i*40);
+      rv.unobserve(e.target);
+    }
+  });
+},{threshold:0.06});
+document.querySelectorAll('.rv').forEach(el=>rv.observe(el));
+</script>
+</body>
+</html>
